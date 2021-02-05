@@ -69,8 +69,6 @@ namespace PhotoOrganizer
                         // CMD progress data showing
                         Console.WriteLine($"Moving {FI.Name} to {time.Year}-{time.Month}");
                     }
-
-
                 }
                 // Final CMD interface
                 Console.WriteLine($"Path was : {mainPath}");

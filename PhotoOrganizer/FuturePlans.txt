@@ -1,0 +1,5 @@
+﻿1. adding a progress bar
+2. adding a GUI
+3. supporting other media formats
+4. clean code and extra classes
+5. more options in menu
