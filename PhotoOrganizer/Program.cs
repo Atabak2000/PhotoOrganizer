@@ -4,6 +4,7 @@ using System.IO;
 using MyDirectory = System.IO.Directory;
 using System.Collections.Generic;
 using System.Linq;
+using MetadataExtractor.Formats.Exif;
 
 namespace PhotoOrganizer
 {
@@ -24,40 +25,64 @@ namespace PhotoOrganizer
             formats.Add(".heif");
             formats.Add(".HEIF");
 
-            string mainPath = @"E:\Music";
-            //string mainPath = SDirectory.GetCurrentDirectory();
+            try
+            {
 
+                //string mainPath = @"C:\Users\Atabak\Desktop";
+                string mainPath = MyDirectory.GetCurrentDirectory();
+                mainPath = MyDirectory.GetParent(mainPath).ToString();
 
-            // Take a snapshot of the file system.  
-            DirectoryInfo dir = new DirectoryInfo(mainPath);
+                // Take a snapshot of the file system.
+                DirectoryInfo dir = new DirectoryInfo(mainPath);
 
-            // This method assumes that the application has discovery permissions  
-            // for all folders under the specified path.  
-            IEnumerable<FileInfo> fileList = dir.GetFiles("*.*",SearchOption.AllDirectories);
-
-            // fileList.Where(); /////////////////////////////////////////////////////////
-
-            //Create the query  
-            //IEnumerable<FileInfo> fileQuery =
-            //    from file in fileList
-            //    where file.Extension == ".JPG"
-            //    select file;
-
-            ////Execute the query. This might write out a lot of files!  
-            //foreach (FileInfo fi in fileQuery)
-            //{
-            //    Console.WriteLine(fi.FullName);
-            //}
+                // This method assumes that the application has discovery permissions  
+                // for all folders under the specified path.  
+                IEnumerable<FileInfo> fileList = dir.GetFiles("*.*", SearchOption.AllDirectories);
 
 
 
+                // Query for selected files
+                IEnumerable<FileInfo> selectedFiles =
+                    from file in fileList
+                    where file.Extension == ".jpg" || file.Extension == ".JPG" || file.Extension == ".jpeg"
+                    || file.Extension == ".JPEG" || file.Extension == ".CR2" || file.Extension == ".png"
+                    || file.Extension == ".PNG" || file.Extension == ".heif" || file.Extension == ".HEIF"
+                    || file.Extension == ".mp4" || file.Extension == ".MP4" || file.Extension == ".mov"
+                    || file.Extension == ".MOV" || file.Extension == ".gif" || file.Extension == ".GIF"
 
 
+                    select file;
 
-            //var directories = ImageMetadataReader.ReadMetadata(path);
-            //foreach (var directory in directories)
-            //    foreach (var tag in directory.Tags)
-            //        Console.WriteLine($"{directory.Name} - {tag.Name} = {tag.Description}");
+                Console.WriteLine($"Main Folder is: {mainPath} \n");
+                Console.WriteLine($"{selectedFiles.Count()} is founded. \n Continue (y/n)?");
+                var answerkey = Console.ReadKey();Console.WriteLine("");
+                if (answerkey.KeyChar=='n') { Environment.Exit(0); }
+
+
+                //foreach(var s in selectedFiles) Console.WriteLine(s.FullName);
+                foreach (FileInfo FI in selectedFiles)
+                {
+                    if (File.GetLastWriteTime(FI.FullName) != null)
+                    {
+                        DateTime time = File.GetLastWriteTime(FI.FullName);
+                        MyDirectory.CreateDirectory(mainPath + "\\SortedByYear" + "\\" + time.Year.ToString() + "\\" + time.Month.ToString());
+                        File.Move(FI.FullName, mainPath + "\\SortedByYear" + "\\" + time.Year.ToString() + "\\" + time.Month.ToString() + "\\" + FI.Name);
+                        Console.WriteLine($"Moving {FI.Name} to {time.Year}-{time.Month}");
+                    }
+
+
+                }
+                Console.WriteLine($"path was : {mainPath}");
+                Console.ReadKey();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                Console.ReadKey();
+            }
+
+            
+            
         }
         
     }
