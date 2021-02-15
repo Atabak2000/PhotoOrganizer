@@ -75,7 +75,7 @@ namespace PhotoOrganizer
                     }while(!i);
                 }
                 
-
+                
                 
 
                 // Take a snapshot of the file system.
