@@ -1,0 +1,13 @@
+using System;
+using System.Collections.Generic;
+
+namespace PhotoOrganizer
+{
+    public static readonly class MyFileType
+    {
+        void MyFileType();
+        public List<string> photoFormats = new List<string>({".jpg",".JPG",".jpeg",".JPEG",".png",".PNG",".heif",".HEIF"});
+        public List<string> rawFormats = new List<string>({".CR2",".NEF"});   
+        public List<string> videoFormats = new List<string>({".MOV",".mov",".gif",".GIF",".MP4",".mp4"});
+    }
+}

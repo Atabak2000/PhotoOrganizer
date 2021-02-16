@@ -54,7 +54,6 @@ namespace PhotoOrganizer
                     // asking new path
                     Console.WriteLine($"For new path enter the full path of folder (or drag&drop it) here and press enter.\n \n");
                     // a loop for getting valid path
-                    bool i=false;
                     do
                     {
                         
@@ -63,19 +62,19 @@ namespace PhotoOrganizer
                         if (MyDirectory.Exists(newPathUnValid))
                         {
                             mainPath=newPathUnValid;
-                            i=true;
+                            break;
                         }
                         else 
                         {
                             Console.WriteLine($"Error in finding path: \n {newPathUnValid}");
                             Console.WriteLine("For new path press \"N\" OR for continue with the default folder press \"C\".");
                             var ans = Console.ReadKey();
-                            if(ans.KeyChar=='C'||ans.KeyChar=='c') i=true;
+                            if(ans.KeyChar=='C'||ans.KeyChar=='c') break;
                         }
-                    }while(!i);
+                    }while(true);
                 }
                 
-                
+
                 
 
                 // Take a snapshot of the file system.
