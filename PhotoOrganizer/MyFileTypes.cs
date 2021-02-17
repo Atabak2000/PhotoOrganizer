@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PhotoOrganizer
 {
-    public static readonly class MyFileType
+    static class MyFileType
     {
         void MyFileType();
         public List<string> photoFormats = new List<string>({".jpg",".JPG",".jpeg",".JPEG",".png",".PNG",".heif",".HEIF"});
