@@ -11,24 +11,7 @@ namespace PhotoOrganizer
         static void Main(string[] args)
         {
 
-            //not used in this code but can be used in query
-            //List<string> formats = new List<string>();
-            //formats.Add(".jpg");
-            //formats.Add(".JPG");
-            //formats.Add(".jpeg");
-            //formats.Add(".JPEG");
-            //formats.Add(".CR2");
-            //formats.Add(".png");
-            //formats.Add(".PNG");
-            //formats.Add(".heif");
-            //formats.Add(".HEIF");
-            //formats.Add(".MOV");
-            //formats.Add(".mov");
-            //formats.Add(".gif");
-            //formats.Add(".GIF");
-            //formats.Add(".MP4");
-            //formats.Add(".mp4");
-
+            
             List<string> formats = new MyFileType().getAllFormats();
             try
             {
@@ -36,9 +19,10 @@ namespace PhotoOrganizer
 
                 // get  Path to search
                 string mainPath = MyDirectory.GetCurrentDirectory();
+                mainPath = @"C:\Users\Atabak\Desktop\Dani_Milad_Sagi_me_Glore";
 
                 // Get parent folder of the app
-                mainPath = MyDirectory.GetParent(mainPath).ToString();
+                //mainPath = MyDirectory.GetParent(mainPath).ToString();
 
                 // show current folder
                 Console.WriteLine($"Detected Path is: \n {mainPath} \n \n");
@@ -100,7 +84,7 @@ namespace PhotoOrganizer
                 Console.WriteLine($"Main Folder is: {mainPath} \n");
                 Console.WriteLine($"{selectedFiles.Count()} is founded. \n Continue (Y/N)?");
                 var answerkey = Console.ReadKey(); Console.WriteLine("");
-                if (answerkey.KeyChar != 'y' | answerkey.KeyChar != 'Y') { Environment.Exit(0); }
+                if (answerkey.KeyChar.ToString().ToUpper() == "N") { Environment.Exit(0); }
 
 
                 // selected folders looped to search
