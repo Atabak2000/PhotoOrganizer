@@ -18,10 +18,10 @@ namespace PhotoOrganizer
 
             // get  Path to search
             string mainPath = MyDirectory.GetCurrentDirectory();
-            mainPath = @"C:\Users\Atabak\Desktop\Dani_Milad_Sagi_me_Glore";
+            
 
             // Get parent folder of the app
-            //mainPath = MyDirectory.GetParent(mainPath).ToString();
+            mainPath = MyDirectory.GetParent(mainPath).ToString();
 
             // show current folder
             Console.WriteLine($"Detected Path is: \n {mainPath} \n \n");
